@@ -57,5 +57,27 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        prev.setOnClickListener(view -> {
+            if (imageId == 0){
+                likeNumber.setText("To jest pierwszy obraz");
+            }
+            else{
+                imageId--;
+                likeNumber.setText(String.valueOf(images.get(imageId).likes));
+                currentImage.setImageResource(images.get(imageId).imageId);
+            }
+        });
+
+        next.setOnClickListener(view -> {
+            if (imageId >= images.size() - 1){
+                likeNumber.setText("To jest ostatni obraz");
+            }
+            else{
+                imageId++;
+                likeNumber.setText(String.valueOf(images.get(imageId).likes));
+                currentImage.setImageResource(images.get(imageId).imageId);
+            }
+        });
+
     }
 }
