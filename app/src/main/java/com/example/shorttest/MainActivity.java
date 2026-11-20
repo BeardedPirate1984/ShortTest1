@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -42,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         images.add(new Image(R.drawable.apple));
         images.add(new Image(R.drawable.skull));
         images.add(new Image(R.drawable.jazz));
+
+        if(savedInstanceState != null){
+            imageId = savedInstanceState.getInt("PHOTO", 0);
+            for (Image x : images){
+                String name = "LIKES" + images.indexOf(x);
+                x.likes = savedInstanceState.getInt(name, 0);
+            }
+        }
 
         Display();
 
@@ -80,5 +89,14 @@ public class MainActivity extends AppCompatActivity {
     public void Display(){
         likeNumber.setText(String.valueOf(images.get(imageId).likes));
         currentImage.setImageResource(images.get(imageId).imageId);
+    }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("PHOTO", imageId);
+        for (Image x : images){
+            String name = "LIKES" + images.indexOf(x);
+            outState.putInt(name, x.likes);
+        }
     }
 }
