@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
         images.add(new Image(R.drawable.skull));
         images.add(new Image(R.drawable.jazz));
 
-        likeNumber.setText(String.valueOf(images.get(imageId).likes));
-        currentImage.setImageResource(images.get(imageId).imageId);
+        Display();
 
         like.setOnClickListener(view -> {
             images.get(imageId).likes ++;
@@ -63,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 imageId--;
-                likeNumber.setText(String.valueOf(images.get(imageId).likes));
-                currentImage.setImageResource(images.get(imageId).imageId);
+                Display();
             }
         });
 
@@ -74,10 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 imageId++;
-                likeNumber.setText(String.valueOf(images.get(imageId).likes));
-                currentImage.setImageResource(images.get(imageId).imageId);
+                Display();
             }
         });
 
+    }
+    public void Display(){
+        likeNumber.setText(String.valueOf(images.get(imageId).likes));
+        currentImage.setImageResource(images.get(imageId).imageId);
     }
 }
